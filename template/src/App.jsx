@@ -1,5 +1,5 @@
 import React from 'react';
-import Templates from './components/Templates';
+import Templates from './components/templates';
 
 function App() {
   return (
