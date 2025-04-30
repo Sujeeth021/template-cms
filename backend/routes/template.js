@@ -1,15 +1,18 @@
 // routes/templateRoutes.js
 const express = require('express');
 const router = express.Router();
+
+const authenticateToken = require('../middlewares/authMiddleware');
+
 const {
   getAllTemplates,
   createTemplate,
 } = require('../controllers/templateController');
 
 // GET all templates
-router.get('/', getAllTemplates);
+router.get('/', authenticateToken , getAllTemplates);
 
 // POST a new template
-router.post('/', createTemplate);
+router.post('/', authenticateToken , createTemplate);
 
 module.exports = router;
