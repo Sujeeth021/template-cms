@@ -3,6 +3,8 @@ const cors = require('cors');
 const connectDB = require('./config/db.config.js');
 const dotenv = require('dotenv');
 const templatesRoute = require('./routes/template');
+const loginRoute = require('./routes/login');
+const signupRoute = require('./routes/signup');
 
 dotenv.config(); // Load environment variables
 
@@ -13,19 +15,25 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+
+app.use('/login', loginRoute);
+app.use('/signup', signupRoute);
 app.use('/api/templates', templatesRoute);
 
-// Connect to Database and start server
-connectDB()
-  .then(() => {
-    console.log('✅ Database connected successfully.');
 
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error('❌ Database connection failed:', err);
-    process.exit(1); // Exit if DB connection fails
+
+// Connect to MongoDB and start server
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('MongoDB connected');
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
   });
+})
+.catch((error) => {
+  console.error('MongoDB connection error:', error);
+});
+
