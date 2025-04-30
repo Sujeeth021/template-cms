@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Template = require('../models/template');
+const Template = require('./models/template');
 
 // GET all templates
 router.get('/', async (req, res) => {
