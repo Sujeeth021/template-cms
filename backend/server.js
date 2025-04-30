@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('/config/db.config.js');
+const connectDB = require('./config/db.config.js');
 const dotenv = require('dotenv');
 const templatesRoute = require('./routes/template');
 const loginRoute = require('./routes/login');
 const signupRoute = require('./routes/signup');
+const mongoose = require('mongoose');
 
 dotenv.config(); // Load .env
 
@@ -32,8 +33,8 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 .then(() => {
   console.log('MongoDB connected');
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  app.listen(process.env.PORT, () => {
+    console.log(`Server running on http://localhost:${process.env.PORT}`);
   });
 })
 .catch((error) => {
