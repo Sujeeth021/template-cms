@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const templatesRoute = require('./routes/template');
 const loginRoute = require('./routes/login');
 const signupRoute = require('./routes/signup');
+const mongoose = require('mongoose');
 
 dotenv.config(); // Load environment variables
 
@@ -20,6 +21,7 @@ app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
 app.use('/api/templates', templatesRoute);
 
+const PORT = process.env.PORT || 5000;
 
 
 // Connect to MongoDB and start server
