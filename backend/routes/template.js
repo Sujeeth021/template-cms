@@ -9,6 +9,9 @@ const {
   createTemplate,
 } = require('../controllers/templateController');
 
+const Template = require('../models/template');
+
+
 // GET all templates
 router.get('/', authenticateToken , getAllTemplates);
 
